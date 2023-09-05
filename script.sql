@@ -34,11 +34,11 @@ CREATE TABLE `cust_user`
 -- Records of cust_user
 -- ----------------------------
 INSERT INTO `cust_user`
-VALUES (1, 'zhangsan', 'zhangsan', '张三', 1);
+VALUES (1, 'zhangsan', '$2a$10$t.z2gAQJec6EraSA63ysYOJhKO1G92eZ/96lbhZOGVc1gLWXXcDpO', 'Tom', 1);
 INSERT INTO `cust_user`
-VALUES (2, 'lisi', 'lisi', '李四', 1);
+VALUES (2, 'lisi', '$2a$10$uu8p9lnZBwvmHIMrcIoFwepmQ/qozpFwt95Nq9YEJGDv/mbtSzxZ2', 'Mike', 1);
 INSERT INTO `cust_user`
-VALUES (3, 'wangwu', 'wangwu', '王五', 1);
+VALUES (3, 'wangwu', '$2a$10$HFOPPYjV27y1VJKfwpynY.C/0c0Kv6V1qSE7fwYdsmOJwWb4huJ76', 'Leo', 1);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`
