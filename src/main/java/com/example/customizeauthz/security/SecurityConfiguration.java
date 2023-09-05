@@ -36,18 +36,18 @@ public class SecurityConfiguration {
         return new AuthenticationProvider() {
             @Override
             public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-                //从Authentication对象中获取用户名和身份凭证信息
+                // Retrieve the username and credentials from the Authentication object
                 String username = authentication.getName();
                 String password = authentication.getCredentials().toString();
                 UserDetails user = userService.loadUserByUsername(username);
-                //if (password.equals(user.getPassword())) {
+                // If (password.equals(user.getPassword())) {
                 if (passwordEncoder().matches(password, user.getPassword())) {
-                    log.info("Authenticate success:" + user.toString());
-                    //密码匹配成功则构建一个UsernamePasswordAuthenticationToken对象并返回
+                    log.info("Authentication success:" + user.toString());
+                    // If the password matches, construct a UsernamePasswordAuthenticationToken object and return it
                     return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
                 } else {
-                    //密码匹配失败则抛出异常
-                    log.error("Authenticate denied:The username or password is wrong!");
+                    // If the password doesn't match, throw an exception
+                    log.error("Authentication denied: The username or password is wrong!");
                     throw new BadCredentialsException("The username or password is wrong!");
                 }
             }
@@ -59,7 +59,7 @@ public class SecurityConfiguration {
         };
     }
 
-    //基于基础认证模式进行测试
+    // Testing with Basic Authentication
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -69,5 +69,4 @@ public class SecurityConfiguration {
         }).httpBasic(withDefaults()).csrf().ignoringAntMatchers("/csrf-token/");
         return http.build();
     }
-
 }
